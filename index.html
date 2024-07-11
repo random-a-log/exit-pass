@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login Page</title>
+</head>
+<body>
+    <h2>Login Page</h2>
+    <form id="loginForm">
+        <label for="name">ame:</label><br>
+        <input type="name" id="name" name="name" required><br>
+        <label for="password">Password:</label><br>
+        <input type="password" id="password" name="password" required><br><br>
+        <input type="submit" value="Login">
+    </form>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const name = document.getElementById('name').value;
+            const password = document.getElementById('password').value;
+
+            // Simple login validation
+            if (name === 'user@example.com' && password === 'password123') {
+                logUserLogin(name);
+            } else {
+                alert('Invalid credentials');
+            }
+        });
+
+        function logUserLogin(name) {
+            fetch('https://script.google.com/macros/s/AKfycbwWw_moYQHIn5s_WOxXP1BPP4JUqI00T8cZ1Dnx8AKOdMdeazZ5LfNln1PWWgceYmycFw/exec', {
+                method: 'POST',
+                body: JSON.stringify({ name: name }),
+            }).then(response => response.json())
+            .then(result => {
+                if (result.status === 'success') {
+                    window.location.href = 'https://docs.google.com/forms/d/1NitaNo6h4k-oF1RLBBY1Zw_8kBszawPyAhU3Cf2ymQE/viewform';
+                } else {
+                    alert('Failed to log login');
+                }
+            });
+        }
+    </script>
+</body>
+</html>
